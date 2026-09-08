@@ -10,14 +10,14 @@ public:
             }
 
         int r = 0;
-        while (!students.empty() && r < (int)students.size()) {
-            int front = students[0];
+        while (!students.empty() && r < students.size()) {
+            int f = students[0];
             students.erase(students.begin());
-            if (front == st.top()) {
+            if (f == st.top()) {
                 st.pop();
                 r = 0;
             } else {
-                students.push_back(front);
+                students.push_back(f);
                 r++;
             }
         }
