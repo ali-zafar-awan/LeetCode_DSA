@@ -1,23 +1,23 @@
 class Solution {
 public:
     bool isValid(vector<string>& b, int n, int r, int c){
-        for(int i = 0; i < n; i++){
-            if(b[i][c]=='Q' && i!=r) return false;
-        }
-        for(int i = 0; i < n; i++){
-            if(b[r][i]=='Q' && i!=c) return false;
-        }
-        for(int i = r-1, j = c-1; i>=0 && j>=0; i--, j--){
-            if(b[i][j]=='Q') return false;
-        }
-        for(int i = r+1, j = c+1; i<n && j<n; i++, j++){
-            if(b[i][j]=='Q') return false;
-        }
-        for(int i = r+1, j = c-1; i<n && j>=0; i++, j--){
-            if(b[i][j]=='Q') return false;
-        }
-        for(int i = r-1, j = c+1; i>=0 && j<n; i--, j++){
-            if(b[i][j]=='Q') return false;
+        for (int k = 0; k < n; k++) {
+            if (b[k][c] == 'Q') return false;
+            if (b[r][k] == 'Q') return false;
+
+            if (k == 0) continue;
+
+            int i1 = r - k, j1 = c - k;
+            if (i1 >= 0 && j1 >= 0 && b[i1][j1] == 'Q') return false;
+
+            int i2 = r + k, j2 = c + k;
+            if (i2 < n && j2 < n && b[i2][j2] == 'Q') return false;
+
+            int i3 = r + k, j3 = c - k;
+            if (i3 < n && j3 >= 0 && b[i3][j3] == 'Q') return false;
+
+            int i4 = r - k, j4 = c + k;
+            if (i4 >= 0 && j4 < n && b[i4][j4] == 'Q') return false;
         }
         return true;
     }
