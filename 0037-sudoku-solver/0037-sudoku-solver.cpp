@@ -12,16 +12,6 @@ public:
                 return false;
             }
         }
-        int rs = (r / 3) * 3;
-        int cs = (c / 3) * 3;
-
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (board[rs + i][cs + j] == val) {
-                    return false;
-                }
-            }
-        }
         return true;
     }
     bool sudoku(vector<vector<char>>& board){
