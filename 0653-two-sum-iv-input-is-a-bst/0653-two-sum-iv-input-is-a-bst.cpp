@@ -11,6 +11,18 @@
  */
 class Solution {
 public:
+    
+    vector<int> inorder(TreeNode *root, vector<int> &vec)
+    {
+        if (root == nullptr)
+        {
+            return vec;
+        }
+        inorder(root->left, vec);
+        vec.push_back(root->val);
+        inorder(root->right, vec);
+        return vec;
+    }
     bool findTarget(TreeNode* root, int k) {
         vector<int> vec;
         inorder(root, vec);
@@ -23,16 +35,5 @@ public:
             }
         }
         return false;
-    }
-    vector<int> inorder(TreeNode *root, vector<int> &vec)
-    {
-        if (root == nullptr)
-        {
-            return vec;
-        }
-        inorder(root->left, vec);
-        vec.push_back(root->val);
-        inorder(root->right, vec);
-        return vec;
     }
 };
