@@ -11,29 +11,31 @@
  */
 class Solution {
 public:
-    
-    vector<int> inorder(TreeNode *root, vector<int> &vec)
-    {
-        if (root == nullptr)
+    bool f(TreeNode* node, TreeNode* cur, int target) {
+        if (node == nullptr) 
         {
-            return vec;
+            return false;
         }
-        inorder(root->left, vec);
-        vec.push_back(root->val);
-        inorder(root->right, vec);
-        return vec;
+        if (node != cur && node->val == target){
+            return true;
+        }
+        return f(node->left, cur, target) || f(node->right, cur, target);
     }
-    bool findTarget(TreeNode* root, int k) {
-        vector<int> vec;
-        inorder(root, vec);
-        int s = vec.size();
-        for(int i =0;i<s;i++){
-            for(int j =i+1;j<s;j++){
-            if(vec[i]+vec[j]==k){
-                return true;
-            }
-            }
+
+    bool inorder(TreeNode* root, TreeNode* top, int k) {
+        if (root == nullptr) {
+            return false;
         }
-        return false;
+        if (inorder(root->left, top, k)) {
+            return true;
+        }
+        if (f(top, root, k - root->val)) {
+            return true;
+        }
+        return inorder(root->right, top, k);
+    }
+
+    bool findTarget(TreeNode* root, int k) {
+        return inorder(root, root, k);
     }
 };
